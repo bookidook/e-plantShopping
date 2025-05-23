@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { addItem } from "./CartSlice";
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
@@ -281,8 +282,8 @@ function ProductList({ onHomeClick }) {
                         </a>
                     </div>
 
-
-    {plantsArray.map((category, index) => ( // Loop through each category in plantsArray
+    <div className="plantsArray">
+        {plantsArray.map((category, index) => ( // Loop through each category in plantsArray
         <div key={index}> {/* Unique key for each category div */}
         <h1>
          <div>{category.category}</div> {/* Display the category name */}
@@ -310,7 +311,7 @@ function ProductList({ onHomeClick }) {
         </div>
     </div>
     ))}
-
+    </div>
                 </div>
                 <div style={styleObjUl}>
                     <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
