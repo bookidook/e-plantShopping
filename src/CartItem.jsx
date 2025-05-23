@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import { addItem, removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
@@ -8,7 +8,25 @@ const CartItem = ({ onContinueShopping }) => {
   const dispatch = useDispatch();
 
   // Calculate total amount for all products in the cart
-  const calculateTotalAmount = () => {
+  const calculateTotalAmount = () => ({ totalCosts, ItemsDisplay }) => {
+    const total_amount = totalCosts.venue + totalCosts.av + totalCosts.meals;
+    return (
+        <div className="pricing-app">
+            <div className="display_box">
+                <div className="header">
+                    <p className="preheading"><h3>Total cost for the event</h3></p>
+                </div>
+                <div>
+                <h2 id="pre_fee_cost_display" className="price">
+    ${total_amount}
+</h2>
+<div className="render_items">
+    <ItemsDisplay />
+</div>
+                </div>
+            </div>
+        </div>
+    );
  
   };
 
@@ -16,17 +34,25 @@ const CartItem = ({ onContinueShopping }) => {
    
   };
 
+    const handleCheckoutShopping = (e) => {
+  alert('Functionality to be added for future reference');
+};
 
-
-  const handleIncrement = (item) => {
+  const handleIncrement = (item) => {const item = state[action.payload];
+    if (item) {
+        item.quantity++;
   };
 
-  const handleDecrement = (item) => {
+  const handleDecrement = (item) => {const item = state[action.payload];
+    if (item) {
+        item.quantity--;;
    
   };
 
-  const handleRemove = (item) => {
-  };
+  const handleRemove = (cart) => {
+    if (cart[index].quantity > 0) {
+      dispatch(handledDecrement(index));
+    };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
@@ -64,5 +90,3 @@ const CartItem = ({ onContinueShopping }) => {
 };
 
 export default CartItem;
-
-
